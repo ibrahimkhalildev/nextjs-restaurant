@@ -1,7 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
-  reactCompiler: true,
-};
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/dj493l0jy/image/upload/**',
+        search: ''
+      }
+    ]
+  },
+  reactCompiler: true
+}
 
-export default nextConfig;
+export default nextConfig
