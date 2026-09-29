@@ -1,15 +1,28 @@
-'use client'
-import React from 'react'
+import React, { Suspense } from 'react'
+import SearchFood from '../components/SearchFood'
 
-const FoodPage = async () => {
+//Option-1: to write promise
+const foodPromise = async () => {
   const res = await fetch(
     'https://phi-lab-server.vercel.app/api/v1/lab/foods/top-foods'
   )
   const data = await res.json()
   const foods = data.data
+  return foods
+}
+
+////Option-2: to write promise
+const foodPromise2 = fetch(
+  'https://phi-lab-server.vercel.app/api/v1/lab/foods/top-foods'
+).then(res => res.json())
+
+const FoodPage = async () => {
   return (
     <div>
-      <h2>Top Foods: {foods.length}</h2>
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* <SearchFood foodPromise={foodPromise()}></SearchFood> */}
+        <SearchFood foodPromise={foodPromise2}></SearchFood>
+      </Suspense>
     </div>
   )
 }
